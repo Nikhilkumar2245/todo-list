@@ -1,0 +1,73 @@
+body{
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    text-align: center;
+}
+
+#taskInput{
+    width: 60%;
+    padding: 15px;
+    font-size: 22px;
+    border-radius: 10px;
+}
+
+button{
+    padding: 15px 30px;
+    font-size: 22px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover{
+    transform: scale(1.08);
+}
+
+#taskList{
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+#taskList li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+
+    font-size: 30px;
+    margin: 20px auto;
+    padding: 15px;
+
+    width: 60%;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+
+    /* Animation */
+    animation: showTask .5s ease;
+    transition: .3s;
+}
+
+#taskList li:hover{
+    transform: scale(1.03);
+}
+
+input[type="checkbox"]{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+@keyframes showTask{
+    from{
+        opacity:0;
+        transform: translateY(-20px);
+    }
+    to{
+        opacity:1;
+        transform: translateY(0);
+    }
+}

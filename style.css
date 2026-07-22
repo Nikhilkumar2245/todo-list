@@ -1,73 +1,133 @@
-body{
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    text-align: center;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
 }
 
-#taskInput{
-    width: 60%;
-    padding: 15px;
-    font-size: 22px;
-    border-radius: 10px;
+body{
+    background:#e8f0ff;
+}
+
+.container{
+
+    width:700px;
+    margin:40px auto;
+    text-align:center;
+
+}
+
+h1{
+
+    margin-bottom:25px;
+    font-size:45px;
+
+}
+
+input{
+
+    width:90%;
+    padding:15px;
+    font-size:22px;
+    border-radius:10px;
+    border:2px solid #444;
+    outline:none;
+
 }
 
 button{
-    padding: 15px 30px;
-    font-size: 22px;
-    margin: 10px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
+
+    margin-top:15px;
+    padding:15px 30px;
+    font-size:22px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.3s;
+
 }
 
 button:hover{
-    transform: scale(1.08);
+
+    transform:scale(1.08);
+
+}
+
+#addBtn{
+
+    background:green;
+    color:white;
+
+}
+
+#clearBtn{
+
+    background:red;
+    color:white;
+    margin-left:10px;
+
 }
 
 #taskList{
-    list-style: none;
-    padding: 0;
-    margin-top: 30px;
+
+    margin-top:30px;
+    list-style:none;
+
 }
 
 #taskList li{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
 
-    font-size: 30px;
-    margin: 20px auto;
-    padding: 15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
 
-    width: 60%;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    background:white;
+    margin:15px auto;
+    padding:18px;
 
-    /* Animation */
-    animation: showTask .5s ease;
-    transition: .3s;
-}
+    width:90%;
 
-#taskList li:hover{
-    transform: scale(1.03);
+    border-radius:12px;
+
+    font-size:28px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+
+    animation:show .4s;
+
 }
 
 input[type="checkbox"]{
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
+
+    width:25px;
+    height:25px;
+
 }
 
-@keyframes showTask{
+.delete{
+
+    background:red;
+    color:white;
+    font-size:18px;
+    padding:8px 15px;
+
+}
+
+@keyframes show{
+
     from{
+
         opacity:0;
-        transform: translateY(-20px);
+        transform:translateY(-20px);
+
     }
+
     to{
+
         opacity:1;
-        transform: translateY(0);
+        transform:translateY(0);
+
     }
+
 }

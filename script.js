@@ -1,37 +1,46 @@
-// Select Elements
 let input = document.getElementById("taskInput");
 let addBtn = document.getElementById("addBtn");
 let clearBtn = document.getElementById("clearBtn");
 let taskList = document.getElementById("taskList");
+
+// Load saved tasks
+window.onload = function () {
+    loadTasks();
+};
 
 // Add Task
 addBtn.addEventListener("click", function () {
 
     let task = input.value.trim();
 
-    // Don't use alert
-    if (task === "") {
-        input.focus();
-        return;
-    }
+    if (task === "") return;
+
+    createTask(task, false);
+
+    saveTasks();
+
+    input.value = "";
+});
+
+// Create Task
+function createTask(taskText, checked) {
 
     let li = document.createElement("li");
-    li.style.fontSize = "28px";
-    li.style.margin = "15px 0";
 
-    // Checkbox
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.style.width = "25px";
-    checkbox.style.height = "25px";
+    checkbox.checked = checked;
 
-    // Task Text
     let span = document.createElement("span");
-    span.innerText = " " + task;
-    span.style.marginLeft = "10px";
+    span.innerText = taskText;
 
-    // Check / Uncheck
+    if (checked) {
+        span.style.textDecoration = "line-through";
+        span.style.color = "gray";
+    }
+
     checkbox.addEventListener("change", function () {
+
         if (checkbox.checked) {
             span.style.textDecoration = "line-through";
             span.style.color = "gray";
@@ -39,21 +48,24 @@ addBtn.addEventListener("click", function () {
             span.style.textDecoration = "none";
             span.style.color = "black";
         }
+
+        saveTasks();
+
     });
 
-    // Delete Button
     let deleteBtn = document.createElement("button");
-deleteBtn.innerHTML = "🗑️";
-deleteBtn.style.fontSize = "22px";
 
-deleteBtn.onclick = function () {
-    li.style.transform = "translateX(200px)";
-    li.style.opacity = "0";
+    deleteBtn.innerText = "Delete";
 
-    setTimeout(() => {
+    deleteBtn.className = "delete";
+
+    deleteBtn.onclick = function () {
+
         li.remove();
-    }, 300);
-};
+
+        saveTasks();
+
+    };
 
     li.appendChild(checkbox);
     li.appendChild(span);
@@ -61,11 +73,49 @@ deleteBtn.onclick = function () {
 
     taskList.appendChild(li);
 
-    input.value = "";
-    input.focus();
-});
+}
+
+// Save Local Storage
+function saveTasks() {
+
+    let tasks = [];
+
+    let allTask = document.querySelectorAll("#taskList li");
+
+    allTask.forEach(function(li){
+
+        tasks.push({
+
+            text: li.querySelector("span").innerText,
+
+            checked: li.querySelector("input").checked
+
+        });
+
+    });
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+}
+
+// Load Local Storage
+function loadTasks(){
+
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    tasks.forEach(function(task){
+
+        createTask(task.text, task.checked);
+
+    });
+
+}
 
 // Clear All
-clearBtn.addEventListener("click", function () {
-    taskList.innerHTML = "";
+clearBtn.addEventListener("click", function(){
+
+    taskList.innerHTML="";
+
+    localStorage.removeItem("tasks");
+
 });
